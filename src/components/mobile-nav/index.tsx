@@ -11,7 +11,7 @@ const MobileNav = () => {
   const id = useId();
 
   return (
-    <div className="lg:hidden mr-2">
+    <div className="lg:hidden mr-3">
       <MenuToggle onToggle={() => setOpen(!open)} open={open} />
       <AnimatePresence>{open && <Nav id={id} setOpen={setOpen} />}</AnimatePresence>
     </div>

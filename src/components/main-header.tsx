@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { ShoppingCart } from 'lucide-react';
 
 import { Navbar, NavbarCenter, NavbarLeft, NavbarRight } from '@/components/ui/navbar';
 import { Button } from '@/components/ui/button';
@@ -40,12 +39,8 @@ const MainHeader = () => {
           </ul>
         </NavbarCenter>
         <NavbarRight>
-          <Button className="mr-1" variant={'link'}>
-            Login
-          </Button>
-          <Button className="mr-[10px]">Register</Button>
-          <Button size={'icon'} variant={'outline'}>
-            <ShoppingCart />
+          <Button asChild>
+            <Link href="https://themeforest.net/user/lglab">Buy Now</Link>
           </Button>
         </NavbarRight>
       </Container>

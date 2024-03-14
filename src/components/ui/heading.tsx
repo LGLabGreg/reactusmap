@@ -30,7 +30,7 @@ export interface HeadingProps extends ComponentPropsWithRef<'h1'> {
 const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
   ({ className, level, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : level;
-    return <Comp className={cn(headingVariants({ level, className }))} ref={ref} {...props} />;
+    return <Comp className={cn(headingVariants({ level }), className)} ref={ref} {...props} />;
   }
 );
 Heading.displayName = 'Heading';

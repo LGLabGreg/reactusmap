@@ -8,16 +8,22 @@ import { Button } from '@/components/ui/button';
 import MobileNav from './mobile-nav';
 
 import { navigation } from '@/lib/config';
-import { useSectionObserver } from '@/lib/hooks';
+import { useScrollPosition, useSectionObserver } from '@/lib/hooks';
 
 import logo from '@/assets/logo.png';
 import { Container } from './ui/container';
 
 const MainHeader = () => {
-  const [activeSectionId] = useSectionObserver();
+  const activeSectionId = useSectionObserver();
+  const scrollPosition = useScrollPosition();
 
   return (
-    <Navbar className="fixed inset-0 w-full z-50" el={'header'}>
+    <Navbar
+      className={`fixed inset-0 w-full z-50 border-b border-transparent transition-colors ${
+        scrollPosition > 0 && 'bg-white border-border'
+      }`}
+      el={'header'}
+    >
       <Container className="flex">
         <NavbarLeft>
           <MobileNav />
@@ -38,10 +44,11 @@ const MainHeader = () => {
             })}
           </ul>
         </NavbarCenter>
+
         <NavbarRight>
-          <Button asChild>
+          {/**<Button asChild>
             <Link href="https://themeforest.net/user/lglab">Buy Now</Link>
-          </Button>
+          </Button> */}
         </NavbarRight>
       </Container>
     </Navbar>

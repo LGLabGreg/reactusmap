@@ -7,12 +7,12 @@ import { ComponentPropsWithRef, forwardRef } from 'react';
 const headingVariants = cva('font-medium dark:text-white', {
   variants: {
     level: {
-      h1: 'text-5xl leading-tight',
-      h2: 'text-4xl leading-tight',
-      h3: 'text-3xl leading-tight',
-      h4: 'text-2xl leading-tight',
-      h5: 'text-xl leading-tight',
-      h6: 'text-lg leading-tight',
+      h1: 'text-6xl leading-tight',
+      h2: 'text-5xl leading-tight',
+      h3: 'text-4xl leading-tight',
+      h4: 'text-3xl leading-tight',
+      h5: 'text-2xl leading-tight',
+      h6: 'text-xl leading-tight',
     },
   },
   defaultVariants: {

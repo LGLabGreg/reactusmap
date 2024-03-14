@@ -7,6 +7,11 @@
 }
 
 :root {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+
   /* Colors */
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
@@ -81,4 +86,18 @@ body {
   button {
     @apply ring-offset-background focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
   }
+
+  h1 {
+    @apply text-4xl lg:text-6xl;
+  }
+  h2 {
+    @apply text-2xl lg:text-5xl;
+  }
+  h3 {
+    @apply text-xl lg:text-4xl;
+  }
+  h4 {
+    @apply text-xl lg:text-xl;
+  }
 }
+

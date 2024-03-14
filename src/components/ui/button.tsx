@@ -16,6 +16,8 @@ const buttonVariants = cva(
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:border-primary',
         link: 'text-primary underline-offset-4 hover:underline',
+        tab: 'border-0 border-b border-b-2 border-b-border rounded-none',
+        tabactive: 'border-0 border-b border-b-2 border-b-primary rounded-none',
       },
       size: {
         default: 'py-[8px] px-[16px]',

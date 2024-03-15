@@ -1,17 +1,17 @@
-import { useState, useCallback, forwardRef, useImperativeHandle } from "react";
+import { useState, useCallback, forwardRef, useImperativeHandle } from 'react';
 import {
   State,
   type StateProps,
   type StateIdType,
   type StateConfigProps,
-} from "./components/State";
-import { Marker, type MarkerProps } from "./components/Marker";
-import { Tooltip, TooltipProps } from "./components/Tooltip";
+} from './components/State';
+import { Marker, type MarkerProps } from './components/Marker';
+import { Tooltip, TooltipProps } from './components/Tooltip';
 
-import { nullFunc } from "./lib/utils";
+import { nullFunc } from './lib/utils';
 
-import usaStates from "./config/states";
-import usaConfig from "./config/config";
+import usaStates from './config/states';
+import usaConfig from './config/config';
 
 type USAMapProps = {
   onStateClick?: (state: StateProps) => void;
@@ -56,9 +56,7 @@ const USAMap = forwardRef<USAMapApi, USAMapProps>((props, ref) => {
     usaStates.map((defaultState: StateProps) => {
       let result = defaultState;
       if (props.states) {
-        const match = props.states.find(
-          (state) => state && state.id === defaultState.id
-        );
+        const match = props.states.find((state) => state && state.id === defaultState.id);
         if (match) {
           result = {
             ...defaultState,
@@ -147,11 +145,7 @@ const USAMap = forwardRef<USAMapApi, USAMapProps>((props, ref) => {
   return (
     <>
       {!disableTooltips && <Tooltip {...tooltip} />}
-      <svg
-        className="react-usa-map"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 930 590"
-      >
+      <svg className="react-usa-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 930 590">
         {sortStates().map((state) => {
           return (
             <State
@@ -179,5 +173,7 @@ const USAMap = forwardRef<USAMapApi, USAMapProps>((props, ref) => {
     </>
   );
 });
+
+USAMap.displayName = 'USAMap';
 
 export default USAMap;

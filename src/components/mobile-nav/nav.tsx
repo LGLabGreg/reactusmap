@@ -30,7 +30,7 @@ const Nav = ({ id, setOpen }: NavProps) => {
 
       exitAnimation();
     }
-  }, [isPresent]);
+  }, [isPresent, safeToRemove, scope, animate]);
 
   return (
     <nav

@@ -8,20 +8,22 @@ import { Button } from '@/components/ui/button';
 import MobileNav from './mobile-nav';
 
 import { navigation } from '@/lib/config';
-import { useScrollPosition, useSectionObserver } from '@/lib/hooks';
+import { useScrollProps, useSectionObserver } from '@/lib/hooks';
 
 import logo from '@/assets/logo.png';
 import { Container } from './ui/container';
 
 const MainHeader = () => {
   const activeSectionId = useSectionObserver();
-  const scrollPosition = useScrollPosition();
+  const scrollProps = useScrollProps();
+
+  console.log('scrollProps', scrollProps);
 
   return (
     <Navbar
-      className={`fixed inset-0 w-full z-50 border-b border-transparent transition-colors ${
-        scrollPosition > 0 && 'bg-white border-border'
-      }`}
+      className={`fixed left-0 w-full z-50 border-b border-transparent transition-all ${
+        scrollProps.position > 0 && 'bg-white border-border'
+      } ${scrollProps.direction === 'up' ? 'top-0' : '-top-mainnav'}`}
       el={'header'}
     >
       <Container className="flex">

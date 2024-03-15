@@ -3,6 +3,7 @@ import Pre from '@/components/ui/pre';
 const headers = ['Prop', 'Description'];
 const rows = [
   {
+    key: 'ref',
     prop: 'ref',
     description: (
       <>
@@ -33,6 +34,7 @@ export default MyApp;`}
     ),
   },
   {
+    key: 'config',
     prop: 'config',
     description: (
       <>
@@ -62,18 +64,22 @@ export default MyApp;`}
     ),
   },
   {
+    key: 'states',
     prop: 'states',
     description: <>TBC</>,
   },
   {
+    key: 'disabledStates',
     prop: 'disabledStates',
     description: <>TBC</>,
   },
   {
+    key: 'markers',
     prop: 'markers',
     description: <>TBC</>,
   },
   {
+    key: 'events',
     prop: (
       <>
         onStateClick
@@ -120,15 +126,15 @@ const Props = () => {
           <thead className="bg-primary text-primary-foreground">
             <tr>
               {headers.map((header) => (
-                <th scope="col" className="px-4 py-2 font-medium">
+                <th key={header} scope="col" className="px-4 py-2 font-medium">
                   {header}
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {rows.map(({ prop, description }) => (
-              <tr className="border-b ">
+            {rows.map(({ key, prop, description }) => (
+              <tr className="border-b" key={key}>
                 <td className="px-4 py-4 align-top">{prop}</td>
                 <td className="px-4 py-4">{description}</td>
               </tr>

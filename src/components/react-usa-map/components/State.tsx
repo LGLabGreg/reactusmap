@@ -1,9 +1,10 @@
-import { type ReactNode, useState } from "react";
-import states from "../config/states";
+import { type ReactNode, useState } from 'react';
+import states from '../config/states';
 
-type StateIdType = (typeof states)[number]["id"];
+type StateIdType = (typeof states)[number]['id'];
 
 type StateConfigProps = {
+  disableTooltips?: boolean;
   abbreviationColor?: string;
   abbreviationHoverColor?: string;
   abbreviationSelectedColor?: string;
@@ -119,12 +120,7 @@ const State = (props: StateProps) => {
         onMouseLeave={() => handleLeave()}
         data-disabled={disabled}
       >
-        <path
-          d={path}
-          fill={fill()}
-          stroke={stroke()}
-          strokeWidth={strokeWidth}
-        ></path>
+        <path d={path} fill={fill()} stroke={stroke()} strokeWidth={strokeWidth}></path>
         <text x={abbreviationX} y={abbreviationY} fill={textFill()}>
           {abbreviation}
         </text>

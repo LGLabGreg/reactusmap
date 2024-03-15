@@ -5,13 +5,13 @@ import Image from 'next/image';
 
 import { Navbar, NavbarCenter, NavbarLeft, NavbarRight } from '@/components/ui/navbar';
 import { Button } from '@/components/ui/button';
-import MobileNav from './mobile-nav';
+import MobileNav from '../components/mobile-nav';
 
 import { navigation } from '@/lib/config';
 import { useScrollProps, useSectionObserver } from '@/lib/hooks';
 
 import logo from '@/assets/logo.png';
-import { Container } from './ui/container';
+import { Container } from '../components/ui/container';
 
 const MainHeader = () => {
   const activeSectionId = useSectionObserver();

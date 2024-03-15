@@ -7,10 +7,6 @@
 }
 
 :root {
-  font-family: "DM Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
 
   /* Colors */
   --background: 0 0% 100%;
@@ -98,6 +94,10 @@ body {
   }
   h4 {
     @apply text-xl lg:text-xl;
+  }
+
+  p {
+    @apply mb-4;
   }
 }
 

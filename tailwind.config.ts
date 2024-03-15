@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import { fontFamily } from 'tailwindcss/defaultTheme';
 
 const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
@@ -39,6 +40,10 @@ const config: Config = {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
         },
+      },
+      fontFamily: {
+        sans: ['var(--font-dmsans)'],
+        mono: ['var(--font-roboto-mono)'],
       },
       height: {
         mainnav: 'var(--mainnav-height)',

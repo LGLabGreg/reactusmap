@@ -1,9 +1,21 @@
 import type { Metadata } from 'next';
-import { DM_Sans } from 'next/font/google';
-import './globals.scss';
-import MainHeader from '@/components/main-header';
+import { Analytics } from '@vercel/analytics/react';
+import { DM_Sans, Roboto_Mono } from 'next/font/google';
 
-const font = DM_Sans({ subsets: ['latin'] });
+import MainHeader from '@/app/main-header';
+
+import './globals.scss';
+
+const dm_sans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-dmsans',
+});
+
+const roboto_mono = Roboto_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-roboto-mono',
+});
 
 export const metadata: Metadata = {
   title: 'Next.js Tailwind',
@@ -16,10 +28,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={font.className}>
+    <html lang="en" className={`${dm_sans.variable} ${roboto_mono.variable}`}>
+      <body>
         <MainHeader />
         {children}
+        <Analytics />
       </body>
     </html>
   );

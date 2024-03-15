@@ -20,7 +20,6 @@ type USAMapProps = {
   onMarkerClick?: (marker: MarkerProps) => void;
   onMarkerEnter?: (marker: MarkerProps) => void;
   onMarkerLeave?: (marker: MarkerProps) => void;
-  disableTooltips?: boolean;
   markers?: MarkerProps[];
   states?: StateProps[];
   disabledStates?: StateIdType[];
@@ -39,9 +38,14 @@ const USAMap = forwardRef<USAMapApi, USAMapProps>((props, ref) => {
     onMarkerClick = nullFunc,
     onMarkerEnter = nullFunc,
     onMarkerLeave = nullFunc,
-    disableTooltips,
+    config = {},
     markers,
   } = props;
+
+  const mapConfig = {
+    ...usaConfig,
+    ...config,
+  };
 
   useImperativeHandle(ref, () => {
     return {
@@ -144,13 +148,12 @@ const USAMap = forwardRef<USAMapApi, USAMapProps>((props, ref) => {
 
   return (
     <>
-      {!disableTooltips && <Tooltip {...tooltip} />}
+      {!mapConfig.disableTooltips && <Tooltip {...tooltip} />}
       <svg className="react-usa-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 930 590">
         {sortStates().map((state) => {
           return (
             <State
-              {...usaConfig}
-              {...props.config}
+              {...mapConfig}
               {...state}
               key={state.id}
               onClick={handleStateClick}

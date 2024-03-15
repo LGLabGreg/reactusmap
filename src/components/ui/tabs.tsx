@@ -1,4 +1,6 @@
-import React, { FC } from 'react';
+'use client';
+
+import React, { FC, useId } from 'react';
 
 import { Button } from './button';
 
@@ -15,12 +17,13 @@ type TabsProps = {
 };
 
 const Tabs: FC<TabsProps> = ({
-  className = 'tabs-component',
+  className,
   tabs = [],
   selectedTab = 0,
   onClick,
   orientation = 'horizontal',
 }) => {
+  const uuid = useId();
   const Panel = tabs && tabs.find((tab) => tab.index === selectedTab);
 
   return (
@@ -37,15 +40,19 @@ const Tabs: FC<TabsProps> = ({
             key={tab.index}
             role="tab"
             aria-selected={selectedTab === tab.index}
-            aria-controls={`tabpanel-${tab.index}`}
+            aria-controls={`tabpanel-${uuid}-${tab.index}`}
             tabIndex={selectedTab === tab.index ? 0 : -1}
-            id={`btn-${tab.index}`}
+            id={`btn-${uuid}-${tab.index}`}
           >
             {tab.label}
           </Button>
         ))}
       </div>
-      <div role="tabpanel" aria-labelledby={`btn-${selectedTab}`} id={`tabpanel-${selectedTab}`}>
+      <div
+        role="tabpanel"
+        aria-labelledby={`btn-${uuid}-${selectedTab}`}
+        id={`tabpanel-${uuid}-${selectedTab}`}
+      >
         {Panel && <Panel.Component index={selectedTab} />}
       </div>
     </div>

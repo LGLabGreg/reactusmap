@@ -63,7 +63,7 @@ function Advanced() {
 
   return (
     <div className="lg:flex w-full">
-      <div className="w-full lg:w-3/4 py-3 px-4">
+      <div className="w-full lg:w-3/4 py-3 lg:px-4">
         <USAMap
           ref={mapRef}
           onStateClick={onStateClick}
@@ -137,7 +137,7 @@ function Advanced() {
           ]}
         />
       </div>
-      <div className="w-full lg:w-1/4 py-3 px-4">
+      <div className="w-full lg:w-1/4 py-3 lg:px-4">
         <form className="max-w-sm mx-auto mb-4">
           <label
             htmlFor="countries"
@@ -147,7 +147,7 @@ function Advanced() {
           </label>
           <select
             id="countries"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             onChange={onSelectChange}
             defaultValue="default"
             value={selectedItem?.id}

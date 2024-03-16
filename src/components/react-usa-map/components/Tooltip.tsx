@@ -84,7 +84,7 @@ const Tooltip = (props: TooltipProps) => {
 
   return (
     <div className="react-usa-map-tooltip" ref={setTooltip}>
-      <div>touchEvent {props?.touchEvent?.touches[0].clientX}</div>
+      <div>touchEvent {props?.touchEvent?.touches[0].clientY}</div>
 
       {content}
     </div>

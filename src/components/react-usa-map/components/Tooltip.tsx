@@ -58,6 +58,7 @@ const Tooltip = (props: TooltipProps) => {
   useEffect(() => {
     const tooltip = ref?.current;
     if (isMobile && tooltip && props.event) {
+      document.removeEventListener('mousemove', onMouseMove);
       const x = props.event.touches[0].clientX;
       const y = props.event.touches[0].clientY;
       top = y - tooltip.clientHeight - 10;

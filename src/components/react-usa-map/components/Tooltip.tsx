@@ -81,7 +81,9 @@ const Tooltip = (props: TooltipProps) => {
 
   return (
     <div className="react-usa-map-tooltip" ref={ref}>
-      <p>isMobile {isMobile.toString()}</p>
+      <div>isMobile {isMobile.toString()}</div>
+      <div>window width {window.innerWidth}</div>
+      <div>tooltip width width {ref?.current?.clientWidth}</div>
       {content}
     </div>
   );

@@ -43,21 +43,6 @@ const myStatesConfig = states.map((state, index) => {
   };
 });
 
-const myStates = states.map((state) => {
-  return {
-    ...state,
-    disabled: false,
-    disableTooltip: false,
-    tooltipContent: (
-      <>
-        <h4>{state.name}</h4>
-        <p>"Lorem ipsum dolores..."</p>
-      </>
-    ),
-    foo: 'bar',
-  };
-});
-
 function Advanced() {
   const mapRef = useRef<USAMapApi>(null);
 

@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useRef } from "react";
+import { type ReactNode, useEffect, useRef } from 'react';
 
 const defaultTooltipState = { visible: false };
 
@@ -35,16 +35,16 @@ const Tooltip = (props: TooltipProps) => {
 
       tooltip.style.top = `${top}px`;
       tooltip.style.left = `${left}px`;
-      tooltip.style.opacity = "1";
+      tooltip.style.opacity = '1';
     }
   };
 
   useEffect(() => {
-    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener('mousemove', onMouseMove);
     return () => {
-      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener('mousemove', onMouseMove);
     };
-  }, []);
+  }, [onMouseMove]);
 
   if (!visible) {
     return null;

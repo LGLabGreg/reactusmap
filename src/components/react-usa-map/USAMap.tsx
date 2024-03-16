@@ -1,18 +1,18 @@
-import { useState, useCallback, forwardRef, useImperativeHandle } from "react";
+import { useState, useCallback, forwardRef, useImperativeHandle } from 'react';
 import {
   State,
   type StateProps,
   type StateIdType,
   type StateConfigProps,
-} from "./components/State";
-import { Marker, type MarkerProps } from "./components/Marker";
-import { Tooltip, TooltipProps } from "./components/Tooltip";
-import MapCoordinates from "./components/MapCoordinates";
+} from './components/State';
+import { Marker, type MarkerProps } from './components/Marker';
+import { Tooltip, TooltipProps } from './components/Tooltip';
+import MapCoordinates from './components/MapCoordinates';
 
-import { nullFunc } from "./lib/utils";
+import { nullFunc } from './lib/utils';
 
-import usaStates from "./config/states";
-import usaConfig from "./config/config";
+import usaStates from './config/states';
+import usaConfig from './config/config';
 
 type USAMapProps = {
   onStateClick?: (state: StateProps) => void;
@@ -63,9 +63,7 @@ const USAMap = forwardRef<USAMapApi, USAMapProps>((props, ref) => {
     usaStates.map((defaultState: StateProps) => {
       let result = defaultState;
       if (props.states) {
-        const match = props.states.find(
-          (state) => state && state.id === defaultState.id
-        );
+        const match = props.states.find((state) => state && state.id === defaultState.id);
         if (match) {
           result = {
             ...defaultState,
@@ -84,13 +82,17 @@ const USAMap = forwardRef<USAMapApi, USAMapProps>((props, ref) => {
     })
   );
 
-  const handleStateEnter = (state: StateProps) => {
-    if (state.name && !state.disableTooltip) {
+  const showTooltip = (props: StateProps | MarkerProps): void => {
+    if ((props.name || props.tooltipContent) && !props.disableTooltip) {
       setTooltip({
         visible: true,
-        content: state.tooltipContent || state.name,
+        content: props.tooltipContent || props.name,
       });
     }
+  };
+
+  const handleStateEnter = (state: StateProps) => {
+    showTooltip(state);
     onStateEnter(state);
   };
 
@@ -100,6 +102,7 @@ const USAMap = forwardRef<USAMapApi, USAMapProps>((props, ref) => {
   };
 
   const handleStateClick = (state: StateProps) => {
+    showTooltip(state);
     setStates((prevStates) =>
       prevStates.map((prevState) => {
         if (prevState.id === state.id) {
@@ -118,16 +121,12 @@ const USAMap = forwardRef<USAMapApi, USAMapProps>((props, ref) => {
   };
 
   const handleMarkerClick = (marker: MarkerProps) => {
+    showTooltip(marker);
     onMarkerClick(marker);
   };
 
   const handleMarkerEnter = (marker: MarkerProps) => {
-    if (marker.name && !marker.disableTooltip) {
-      setTooltip({
-        visible: true,
-        content: marker.tooltipContent || marker.name,
-      });
-    }
+    showTooltip(marker);
     onMarkerEnter(marker);
   };
 
@@ -155,11 +154,7 @@ const USAMap = forwardRef<USAMapApi, USAMapProps>((props, ref) => {
     <div className="relative">
       {enableMapCoordinates && <MapCoordinates />}
       {!mapConfig.disableTooltips && <Tooltip {...tooltip} />}
-      <svg
-        className="react-usa-map"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 930 590"
-      >
+      <svg className="react-usa-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 930 590">
         {sortStates().map((state) => {
           return (
             <State
@@ -187,6 +182,6 @@ const USAMap = forwardRef<USAMapApi, USAMapProps>((props, ref) => {
   );
 });
 
-USAMap.displayName = "USAMap";
+USAMap.displayName = 'USAMap';
 
 export default USAMap;

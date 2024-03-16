@@ -184,6 +184,7 @@ const USAMap = forwardRef<USAMapApi, USAMapProps>((props, ref) => {
               onClick={handleMarkerClick}
               onEnter={handleMarkerEnter}
               onLeave={handleMarkerLeave}
+              onTouchStart={handleTouchStart}
             />
           ))}
       </svg>

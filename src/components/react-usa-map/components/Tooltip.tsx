@@ -25,7 +25,7 @@ const Tooltip = (props: TooltipProps) => {
   const setTooltipPos = ({ clientX, clientY }: TooltipPosProps) => {
     let top: number = 0,
       left: number = 0;
-    if (tooltip) {
+    if (tooltip && window) {
       if (props.touchEvent) {
         const y = props.touchEvent.touches[0].clientY;
         top = y - tooltip.clientHeight - 50;

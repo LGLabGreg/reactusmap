@@ -16,14 +16,14 @@ type TabsType = {
 
 const tabs: TabsType = [
   {
-    label: 'Simple',
+    label: 'Advanced',
     index: 1,
-    Component: Simple,
+    Component: Advanced,
   },
   {
-    label: 'Advanced',
+    label: 'Simple',
     index: 2,
-    Component: Advanced,
+    Component: Simple,
   },
 ];
 

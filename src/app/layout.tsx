@@ -18,8 +18,25 @@ const roboto_mono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Next.js Tailwind',
-  description: 'Next.js Tailwind',
+  title: 'React United States SVG Map',
+  description:
+    'Easily create stunning interactive maps of the United States using this React SVG component. The component is coded using Typescript but can be used in plain Javascript React projects.',
+  openGraph: {
+    title: 'React United States SVG Map',
+    description:
+      'Easily create stunning interactive maps of the United States using this React SVG component. The component is coded using Typescript but can be used in plain Javascript React projects.',
+    url: 'https://reactusmap.vercel.app/',
+    siteName: 'React United States Map',
+    images: [
+      {
+        url: 'https://reactusmap.vercel.app/images/react-united-states-map.jpg',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({

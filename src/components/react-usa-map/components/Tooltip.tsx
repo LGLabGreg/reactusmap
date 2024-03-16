@@ -16,9 +16,11 @@ const Tooltip = (props: TooltipProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const isMobile = useIsMobile();
 
+  console.log('isMobile', isMobile);
+
   const onMouseMove = ({ clientX, clientY }: MouseEvent) => {
     const tooltip = ref?.current;
-    if (tooltip) {
+    if (tooltip && !isMobile) {
       top = clientY - tooltip.clientHeight - 10;
       left = clientX - tooltip.clientWidth / 2;
       windowHeight = window.innerHeight;
@@ -79,6 +81,7 @@ const Tooltip = (props: TooltipProps) => {
 
   return (
     <div className="react-usa-map-tooltip" ref={ref}>
+      <p>isMobile {isMobile.toString()}</p>
       {content}
     </div>
   );

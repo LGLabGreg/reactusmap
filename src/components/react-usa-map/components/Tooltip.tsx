@@ -12,6 +12,7 @@ type TooltipProps = {
 const Tooltip = (props: TooltipProps) => {
   const { visible, content } = props;
   let top, left, windowHeight, windowWidth;
+  let hasMouseMove = false;
 
   const ref = useRef<HTMLDivElement | null>(null);
   const isMobile = useIsMobile();
@@ -21,6 +22,8 @@ const Tooltip = (props: TooltipProps) => {
   const onMouseMove = ({ clientX, clientY }: MouseEvent) => {
     const tooltip = ref?.current;
     if (tooltip && !isMobile) {
+      hasMouseMove = true;
+
       top = clientY - tooltip.clientHeight - 10;
       left = clientX - tooltip.clientWidth / 2;
       windowHeight = window.innerHeight;
@@ -58,7 +61,6 @@ const Tooltip = (props: TooltipProps) => {
   useEffect(() => {
     const tooltip = ref?.current;
     if (isMobile && tooltip && props.event) {
-      document.removeEventListener('mousemove', onMouseMove);
       const x = props.event.touches[0].clientX;
       const y = props.event.touches[0].clientY;
       top = y - tooltip.clientHeight - 10;
@@ -80,10 +82,12 @@ const Tooltip = (props: TooltipProps) => {
     return null;
   }
 
+  console.log('hasMouseMove', hasMouseMove);
+
   return (
     <div className="react-usa-map-tooltip" ref={ref}>
       <div>isMobile {isMobile.toString()}</div>
-      <div>window width {window.innerWidth}</div>
+      <div>tooltip left {ref?.current?.style.left}</div>
       <div>tooltip width width {ref?.current?.clientWidth}</div>
       {content}
     </div>

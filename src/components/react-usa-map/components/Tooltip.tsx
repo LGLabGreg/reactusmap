@@ -1,29 +1,25 @@
-import { type ReactNode, useEffect, useRef, type TouchEvent } from 'react';
-import { useIsMobile } from '../lib/hooks';
+import { type ReactNode, useEffect, type TouchEvent, useState } from 'react';
 
 const defaultTooltipState = { visible: false };
 
 type TooltipProps = {
   visible?: boolean;
   content?: ReactNode;
-  event?: TouchEvent;
+  touchEvent?: TouchEvent;
 };
 
 const Tooltip = (props: TooltipProps) => {
   const { visible, content } = props;
+
+  //let tooltip: HTMLDivElement | null = null;
   let top, left, windowHeight, windowWidth;
-  let hasMouseMove = false;
 
-  const ref = useRef<HTMLDivElement | null>(null);
-  const isMobile = useIsMobile();
+  const [tooltip, setTooltip] = useState<HTMLDivElement | null>(null);
 
-  console.log('isMobile', isMobile);
+  // const ref = useRef<HTMLDivElement | null>(null);
 
   const onMouseMove = ({ clientX, clientY }: MouseEvent) => {
-    const tooltip = ref?.current;
-    if (tooltip && !isMobile) {
-      hasMouseMove = true;
-
+    if (tooltip) {
       top = clientY - tooltip.clientHeight - 10;
       left = clientX - tooltip.clientWidth / 2;
       windowHeight = window.innerHeight;
@@ -48,21 +44,25 @@ const Tooltip = (props: TooltipProps) => {
   };
 
   useEffect(() => {
-    if (!isMobile) {
-      document.addEventListener('mousemove', onMouseMove);
-    }
-    return () => {
-      if (!isMobile) {
-        document.removeEventListener('mousemove', onMouseMove);
+    console.log('useEffect tooltip', tooltip);
+    if (tooltip) {
+      console.log('useEffect touchEvent', props.touchEvent);
+      if (props.touchEvent) {
+        setTouchTooltip();
+      } else {
+        document.addEventListener('mousemove', onMouseMove);
       }
-    };
-  }, []);
+    }
 
-  useEffect(() => {
-    const tooltip = ref?.current;
-    if (isMobile && tooltip && props.event) {
-      const x = props.event.touches[0].clientX;
-      const y = props.event.touches[0].clientY;
+    return () => {
+      document.removeEventListener('mousemove', onMouseMove);
+    };
+  }, [tooltip]);
+
+  const setTouchTooltip = () => {
+    if (tooltip && props.touchEvent) {
+      const x = props.touchEvent.touches[0].clientX;
+      const y = props.touchEvent.touches[0].clientY;
       top = y - tooltip.clientHeight - 10;
       left = window.innerWidth / 2 - tooltip.clientWidth / 2;
 
@@ -76,19 +76,16 @@ const Tooltip = (props: TooltipProps) => {
       tooltip.style.left = `${left}px`;
       tooltip.style.opacity = '1';
     }
-  }, [isMobile, ref]);
+  };
 
   if (!visible) {
     return null;
   }
 
-  console.log('hasMouseMove', hasMouseMove);
-
   return (
-    <div className="react-usa-map-tooltip" ref={ref}>
-      <div>isMobile {isMobile.toString()}</div>
-      <div>tooltip left {ref?.current?.style.left}</div>
-      <div>tooltip width width {ref?.current?.clientWidth}</div>
+    <div className="react-usa-map-tooltip" ref={setTooltip}>
+      <div>touchEvent {props?.touchEvent?.touches[0].clientX}</div>
+
       {content}
     </div>
   );

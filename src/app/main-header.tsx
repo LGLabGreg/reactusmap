@@ -17,8 +17,6 @@ const MainHeader = () => {
   const activeSectionId = useSectionObserver();
   const scrollProps = useScrollProps();
 
-  console.log('scrollProps', scrollProps);
-
   return (
     <Navbar
       className={`fixed left-0 w-full z-50 border-b border-transparent transition-all ${

@@ -120,11 +120,11 @@ const USAMap = forwardRef<USAMapApi, USAMapProps>((props, ref) => {
     onStateClick(state);
   };
 
-  const handleTouchStart = (event: TouchEvent, props: StateProps | MarkerProps): void => {
+  const handleTouchStart = (touchEvent: TouchEvent, props: StateProps | MarkerProps): void => {
     setTooltip({
       visible: true,
       content: props.tooltipContent || props.name,
-      event,
+      touchEvent,
     });
   };
 

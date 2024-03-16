@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useRef } from 'react';
+import { type ReactNode, useEffect, useRef } from "react";
 
 const defaultTooltipState = { visible: false };
 
@@ -9,22 +9,40 @@ type TooltipProps = {
 
 const Tooltip = (props: TooltipProps) => {
   const { visible, content } = props;
+  let top, left, windowHeight, windowWidth;
 
   const ref = useRef<HTMLDivElement | null>(null);
 
   const onMouseMove = ({ clientX, clientY }: MouseEvent) => {
     const tooltip = ref?.current;
     if (tooltip) {
-      tooltip.style.top = `${clientY - tooltip.clientHeight - 30}px`;
-      tooltip.style.left = `${clientX - tooltip.clientWidth / 2}px`;
-      tooltip.style.opacity = '1';
+      top = clientY - tooltip.clientHeight - 10;
+      left = clientX - tooltip.clientWidth / 2;
+      windowHeight = window.innerHeight;
+      windowWidth = window.innerWidth;
+
+      if (top < 0) {
+        top = tooltip.clientHeight + 30;
+      } else if (top + tooltip.clientHeight > windowHeight) {
+        top = windowHeight - tooltip.clientHeight;
+      }
+
+      if (left < 0) {
+        left = tooltip.clientWidth / 2;
+      } else if (left + tooltip.clientWidth > windowWidth) {
+        left = windowWidth - tooltip.clientWidth - tooltip.clientWidth / 2;
+      }
+
+      tooltip.style.top = `${top}px`;
+      tooltip.style.left = `${left}px`;
+      tooltip.style.opacity = "1";
     }
   };
 
   useEffect(() => {
-    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener("mousemove", onMouseMove);
     return () => {
-      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener("mousemove", onMouseMove);
     };
   }, []);
 

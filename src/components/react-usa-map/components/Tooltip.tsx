@@ -57,7 +57,7 @@ const Tooltip = (props: TooltipProps) => {
     return () => {
       document.removeEventListener('mousemove', onMouseMove);
     };
-  }, [tooltip]);
+  }, [tooltip, props.touchEvent]);
 
   const setTouchTooltip = () => {
     if (tooltip && props.touchEvent) {

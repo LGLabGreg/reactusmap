@@ -1,4 +1,4 @@
-import { useState, useCallback, forwardRef, useImperativeHandle } from 'react';
+import { useState, useCallback, forwardRef, useImperativeHandle, type TouchEvent } from 'react';
 import {
   State,
   type StateProps,
@@ -120,6 +120,14 @@ const USAMap = forwardRef<USAMapApi, USAMapProps>((props, ref) => {
     onStateClick(state);
   };
 
+  const handleTouchStart = (event: TouchEvent, props: StateProps | MarkerProps): void => {
+    setTooltip({
+      visible: true,
+      content: props.tooltipContent || props.name,
+      event,
+    });
+  };
+
   const handleMarkerClick = (marker: MarkerProps) => {
     showTooltip(marker);
     onMarkerClick(marker);
@@ -164,6 +172,7 @@ const USAMap = forwardRef<USAMapApi, USAMapProps>((props, ref) => {
               onClick={handleStateClick}
               onEnter={handleStateEnter}
               onLeave={handleStateLeave}
+              onTouchStart={handleTouchStart}
             />
           );
         })}

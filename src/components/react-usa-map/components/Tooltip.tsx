@@ -1,10 +1,12 @@
-import { type ReactNode, useEffect, useRef } from 'react';
+import { type ReactNode, useEffect, useRef, type TouchEvent } from 'react';
+import { useIsMobile } from '../lib/hooks';
 
 const defaultTooltipState = { visible: false };
 
 type TooltipProps = {
   visible?: boolean;
   content?: ReactNode;
+  event?: TouchEvent;
 };
 
 const Tooltip = (props: TooltipProps) => {
@@ -12,6 +14,7 @@ const Tooltip = (props: TooltipProps) => {
   let top, left, windowHeight, windowWidth;
 
   const ref = useRef<HTMLDivElement | null>(null);
+  const isMobile = useIsMobile();
 
   const onMouseMove = ({ clientX, clientY }: MouseEvent) => {
     const tooltip = ref?.current;
@@ -22,7 +25,7 @@ const Tooltip = (props: TooltipProps) => {
       windowWidth = window.innerWidth;
 
       if (top < 0) {
-        top = tooltip.clientHeight + 30;
+        top = clientY + 30;
       } else if (top + tooltip.clientHeight > windowHeight) {
         top = windowHeight - tooltip.clientHeight;
       }
@@ -40,11 +43,35 @@ const Tooltip = (props: TooltipProps) => {
   };
 
   useEffect(() => {
-    document.addEventListener('mousemove', onMouseMove);
+    if (!isMobile) {
+      document.addEventListener('mousemove', onMouseMove);
+    }
     return () => {
-      document.removeEventListener('mousemove', onMouseMove);
+      if (!isMobile) {
+        document.removeEventListener('mousemove', onMouseMove);
+      }
     };
-  }, [onMouseMove]);
+  }, []);
+
+  useEffect(() => {
+    const tooltip = ref?.current;
+    if (isMobile && tooltip && props.event) {
+      const x = props.event.touches[0].clientX;
+      const y = props.event.touches[0].clientY;
+      top = y - tooltip.clientHeight - 10;
+      left = window.innerWidth / 2 - tooltip.clientWidth / 2;
+
+      if (top < 0) {
+        top = y + 30;
+      } else if (top + tooltip.clientHeight > window.innerHeight) {
+        top = window.innerHeight - tooltip.clientHeight;
+      }
+
+      tooltip.style.top = `${top}px`;
+      tooltip.style.left = `${left}px`;
+      tooltip.style.opacity = '1';
+    }
+  }, [isMobile, ref]);
 
   if (!visible) {
     return null;

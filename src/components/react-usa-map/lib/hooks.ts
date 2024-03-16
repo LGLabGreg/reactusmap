@@ -1,4 +1,4 @@
-import { useState, type RefObject, useEffect } from "react";
+import { useState, type RefObject, useEffect } from 'react';
 
 const originalDimensions = {
   width: 930,
@@ -30,12 +30,12 @@ const useMousePosition = (divRef: RefObject<HTMLDivElement>): MousePosition => {
 
     const parentElement = divRef.current;
     if (parentElement) {
-      parentElement.addEventListener("mousemove", updateMousePosition);
+      parentElement.addEventListener('mousemove', updateMousePosition);
     }
 
     return () => {
       if (parentElement) {
-        parentElement.removeEventListener("mousemove", updateMousePosition);
+        parentElement.removeEventListener('mousemove', updateMousePosition);
       }
     };
   }, [divRef]);
@@ -43,4 +43,16 @@ const useMousePosition = (divRef: RefObject<HTMLDivElement>): MousePosition => {
   return mousePosition;
 };
 
-export { useMousePosition };
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent;
+    const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+    setIsMobile(mobileRegex.test(userAgent));
+  }, []);
+
+  return isMobile;
+};
+
+export { useMousePosition, useIsMobile };

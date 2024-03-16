@@ -1,7 +1,7 @@
-import { type ReactNode, useState } from "react";
-import states from "../config/states";
+import { type ReactNode, useState, type TouchEvent } from 'react';
+import states from '../config/states';
 
-type StateIdType = (typeof states)[number]["id"];
+type StateIdType = (typeof states)[number]['id'];
 
 type StateConfigProps = {
   disableTooltips?: boolean;
@@ -35,6 +35,7 @@ type StateProps = {
   onEnter?: (state: StateProps) => void;
   onLeave?: (state: StateProps) => void;
   onClick?: (state: StateProps) => void;
+  onTouchStart?: (event: TouchEvent, state: StateProps) => void;
 } & StateConfigProps;
 
 const State = (props: StateProps) => {
@@ -61,6 +62,7 @@ const State = (props: StateProps) => {
     onClick,
     onEnter,
     onLeave,
+    onTouchStart,
   } = props;
 
   const [over, setOver] = useState(false);
@@ -117,14 +119,10 @@ const State = (props: StateProps) => {
         onClick={() => !disabled && onClick && onClick(props)}
         onMouseEnter={() => handleEnter()}
         onMouseLeave={() => handleLeave()}
+        onTouchStart={(event: TouchEvent) => onTouchStart && onTouchStart(event, props)}
         data-disabled={disabled}
       >
-        <path
-          d={path}
-          fill={fill()}
-          stroke={stroke()}
-          strokeWidth={strokeWidth}
-        ></path>
+        <path d={path} fill={fill()} stroke={stroke()} strokeWidth={strokeWidth}></path>
         <text x={abbreviationX} y={abbreviationY} fill={textFill()}>
           {abbreviation}
         </text>

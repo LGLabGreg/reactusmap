@@ -1,6 +1,13 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## License
+
+Feel free to use for personal projects, for commercial projects please buy a license here: https://codecanyon.net/item/react-united-states-svg-map/51332281
+
+Demo and documentation here: https://reactusmap.vercel.app/
+
 
 ## Getting Started
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 First, install the dependencies:
 

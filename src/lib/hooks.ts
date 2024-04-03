@@ -34,6 +34,12 @@ const useScrollProps = () => {
   const [scrollProps, setScrollProps] = useState({ direction: 'up', position: 0 });
 
   useEffect(() => {
+    if (window) {
+      setScrollProps({ ...scrollProps, position: window.scrollY });
+    }
+  }, []);
+
+  useEffect(() => {
     const threshold = 0;
     let lastScrollY = window.scrollY;
     let ticking = false;

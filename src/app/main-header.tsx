@@ -17,8 +17,6 @@ const MainHeader = () => {
   const activeSectionId = useSectionObserver();
   const scrollProps = useScrollProps();
 
-  console.log('scrollProps', scrollProps);
-
   return (
     <Navbar
       className={`fixed left-0 w-full z-50 border-b border-transparent transition-all ${
@@ -48,9 +46,11 @@ const MainHeader = () => {
         </NavbarCenter>
 
         <NavbarRight>
-          {/**<Button asChild>
-            <Link href="https://themeforest.net/user/lglab">Buy Now</Link>
-          </Button> */}
+          <Button asChild>
+            <Link href="https://codecanyon.net/item/react-united-states-svg-map/51332281">
+              Buy Now
+            </Link>
+          </Button>
         </NavbarRight>
       </Container>
     </Navbar>

@@ -47,7 +47,10 @@ const MainHeader = () => {
 
         <NavbarRight>
           <Button asChild>
-            <Link href="https://codecanyon.net/item/react-united-states-svg-map/51332281">
+            <Link
+              href="https://codecanyon.net/item/react-united-states-svg-map/51332281"
+              target="_blank"
+            >
               Buy Now
             </Link>
           </Button>
